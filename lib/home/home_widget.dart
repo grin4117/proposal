@@ -6,6 +6,7 @@ import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:stop_watch_timer/stop_watch_timer.dart';
 import 'package:flutter/material.dart';
+import 'package:just_audio/just_audio.dart';
 import 'home_model.dart';
 export 'home_model.dart';
 
@@ -166,15 +167,31 @@ class _HomeWidgetState extends State<HomeWidget> {
                       ),
                 ),
                 if (_model.date != null)
-                  Text(
-                    valueOrDefault<String>(
-                      _model.date?.toString(),
-                      '1',
+                  InkWell(
+                    splashColor: Colors.transparent,
+                    focusColor: Colors.transparent,
+                    hoverColor: Colors.transparent,
+                    highlightColor: Colors.transparent,
+                    onTap: () async {
+                      _model.soundPlayer ??= AudioPlayer();
+                      if (_model.soundPlayer!.playing) {
+                        await _model.soundPlayer!.stop();
+                      }
+                      _model.soundPlayer!.setVolume(1.0);
+                      await _model.soundPlayer!
+                          .setAsset('assets/audios/other.mp3')
+                          .then((_) => _model.soundPlayer!.play());
+                    },
+                    child: Text(
+                      valueOrDefault<String>(
+                        _model.date?.toString(),
+                        '1',
+                      ),
+                      style: FlutterFlowTheme.of(context).bodyMedium.override(
+                            fontFamily: 'Readex Pro',
+                            letterSpacing: 0.0,
+                          ),
                     ),
-                    style: FlutterFlowTheme.of(context).bodyMedium.override(
-                          fontFamily: 'Readex Pro',
-                          letterSpacing: 0.0,
-                        ),
                   ),
               ].divide(const SizedBox(height: 24.0)).around(const SizedBox(height: 24.0)),
             ),

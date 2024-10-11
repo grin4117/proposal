@@ -3,6 +3,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import 'home_widget.dart' show HomeWidget;
 import 'package:stop_watch_timer/stop_watch_timer.dart';
 import 'package:flutter/material.dart';
+import 'package:just_audio/just_audio.dart';
 
 class HomeModel extends FlutterFlowModel<HomeWidget> {
   ///  Local state fields for this page.
@@ -22,6 +23,8 @@ class HomeModel extends FlutterFlowModel<HomeWidget> {
   );
   FlutterFlowTimerController timerController =
       FlutterFlowTimerController(StopWatchTimer(mode: StopWatchMode.countDown));
+
+  AudioPlayer? soundPlayer;
 
   @override
   void initState(BuildContext context) {}

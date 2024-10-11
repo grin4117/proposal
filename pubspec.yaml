@@ -26,6 +26,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   alarm: ^3.1.5
+  audio_session: 0.1.16
   auto_size_text: 3.0.0
   cached_network_image: 3.3.1
   cloud_firestore: 4.17.3
@@ -57,6 +58,9 @@ dependencies:
   http: ^1.2.2
   intl: 0.19.0
   json_path: 0.7.2
+  just_audio: 0.9.35
+  just_audio_platform_interface: 4.2.1
+  just_audio_web: 0.4.8
   mime_type: 1.0.0
   page_transition: 2.1.0
   path_provider: 2.1.3
