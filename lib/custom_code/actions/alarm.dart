@@ -20,12 +20,12 @@ Future alarm(DateTime dateTime) async {
   // Add your function code here!
   WidgetsFlutterBinding.ensureInitialized();
 
-  await Alarm.init();
-
   final alarmSettings = AlarmSettings(
     id: 42,
-    dateTime: dateTime,
+    alarmDateTime: dateTime,
+    dateTime: DateTime.now().add(const Duration(minutes: 1)),
     assetAudioPath: 'assets/audios/other.mp3',
+    assetAudio: 'assets/audios/other.mp3',
     loopAudio: true,
     vibrate: true,
     volume: 0.8,
