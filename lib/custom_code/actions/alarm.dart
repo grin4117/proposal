@@ -25,7 +25,7 @@ Future alarm(DateTime dateTime) async {
   final alarmSettings = AlarmSettings(
     id: 42,
     dateTime: dateTime,
-    assetAudioPath: 'assets/audios/Fallen.mp3',
+    assetAudioPath: 'assets/audios/Amnesia.mp4',
     loopAudio: true,
     vibrate: true,
     volume: 0.8,
