@@ -11,7 +11,7 @@ import 'package:flutter/material.dart';
 
 import 'package:alarm/alarm.dart';
 
-Future newCustomAction() async {
+Future stopAlarm(int id) async {
+  await Alarm.stop(id);
   // Add your function code here!
-  await Alarm.init();
 }

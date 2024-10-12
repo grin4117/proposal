@@ -4,8 +4,10 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
+import '/flutter_flow/permissions_util.dart';
 import 'package:stop_watch_timer/stop_watch_timer.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:just_audio/just_audio.dart';
 import 'home_model.dart';
 export 'home_model.dart';
@@ -26,6 +28,11 @@ class _HomeWidgetState extends State<HomeWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => HomeModel());
+
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      await requestPermission(notificationsPermission);
+    });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
@@ -75,6 +82,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                   onPressed: () async {
                     _model.timerController.onResetTimer();
 
+                    // Change to date+time picker to pick dates
                     final datePickedDate = await showDatePicker(
                       context: context,
                       initialDate: (functions.add1min(getCurrentTimestamp) ??
@@ -124,6 +132,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                     }
                     await actions.alarm(
                       _model.datePicked!,
+                      42,
                     );
                     _model.date = functions.add1min(getCurrentTimestamp);
                     safeSetState(() {});
@@ -179,7 +188,8 @@ class _HomeWidgetState extends State<HomeWidget> {
                       }
                       _model.soundPlayer!.setVolume(1.0);
                       await _model.soundPlayer!
-                          .setAsset('assets/audios/other.mp3')
+                          .setAsset(
+                              'assets/audios/example_assets_star_wars.mp3')
                           .then((_) => _model.soundPlayer!.play());
                     },
                     child: Text(
@@ -193,6 +203,29 @@ class _HomeWidgetState extends State<HomeWidget> {
                           ),
                     ),
                   ),
+                FFButtonWidget(
+                  onPressed: () async {
+                    await actions.stopAlarm(
+                      42,
+                    );
+                  },
+                  text: 'Stop',
+                  options: FFButtonOptions(
+                    height: 40.0,
+                    padding:
+                        const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                    iconPadding:
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                    color: FlutterFlowTheme.of(context).primary,
+                    textStyle: FlutterFlowTheme.of(context).titleSmall.override(
+                          fontFamily: 'Readex Pro',
+                          color: Colors.white,
+                          letterSpacing: 0.0,
+                        ),
+                    elevation: 0.0,
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                ),
               ].divide(const SizedBox(height: 24.0)).around(const SizedBox(height: 24.0)),
             ),
           ),

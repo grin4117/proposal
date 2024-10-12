@@ -16,22 +16,21 @@ import 'dart:async';
 import 'package:alarm/alarm.dart';
 import 'package:flutter/services.dart';
 
-Future alarm(DateTime dateTime) async {
+Future alarm(DateTime dateTime, int id) async {
   // Add your function code here!
   WidgetsFlutterBinding.ensureInitialized();
 
   final alarmSettings = AlarmSettings(
-    id: 42,
-    alarmDateTime: dateTime,
+    id: id,
     dateTime: DateTime.now().add(const Duration(minutes: 1)),
-    assetAudioPath: 'assets/audios/other.mp3',
-    assetAudio: 'assets/audios/other.mp3',
+    assetAudioPath: 'assets/audios/example_assets_star_wars.mp3',
     loopAudio: true,
     vibrate: true,
     volume: 0.8,
-    fadeDuration: 3.0,
+    fadeDuration: 10.0,
     notificationTitle: 'This is the title',
     notificationBody: 'This is the body',
     enableNotificationOnKill: Platform.isIOS,
   );
+  await Alarm.set(alarmSettings: alarmSettings);
 }
