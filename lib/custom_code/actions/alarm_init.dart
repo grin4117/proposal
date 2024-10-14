@@ -11,7 +11,7 @@ import 'package:flutter/material.dart';
 
 import 'package:alarm/alarm.dart';
 
-Future newCustomAction() async {
+Future alarmInit() async {
   // Add your function code here!
   await Alarm.init();
 }

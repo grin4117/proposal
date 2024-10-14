@@ -22,7 +22,8 @@ Future alarm(DateTime dateTime, int id) async {
 
   final alarmSettings = AlarmSettings(
     id: id,
-    dateTime: DateTime.now().add(const Duration(minutes: 1)),
+    dateTime:
+        dateTime, //for testing use: DateTime.now().add(const Duration(minutes: 1))
     assetAudioPath: 'assets/audios/example_assets_star_wars.mp3',
     loopAudio: true,
     vibrate: true,
@@ -33,4 +34,12 @@ Future alarm(DateTime dateTime, int id) async {
     enableNotificationOnKill: Platform.isIOS,
   );
   await Alarm.set(alarmSettings: alarmSettings);
+  Alarm.ringStream.stream.listen((_) => yourOnRingCallback(id));
+}
+
+yourOnRingCallback(int id) async {
+  FFAppState().update(() {
+    FFAppState().ringing = true;
+  });
+  await Alarm.stop(id);
 }

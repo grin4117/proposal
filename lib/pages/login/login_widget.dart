@@ -155,10 +155,10 @@ class _LoginWidgetState extends State<LoginWidget> {
                   ),
                 ),
                 const SizedBox(
-                  width: double.infinity,
+                  width: 400.0,
                   height: 500.0,
-                  child: custom_widgets.Osm(
-                    width: double.infinity,
+                  child: custom_widgets.OsmSearchPick(
+                    width: 400.0,
                     height: 500.0,
                   ),
                 ),
